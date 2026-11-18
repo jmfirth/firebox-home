@@ -69,7 +69,7 @@ pub fn home_dir() -> Option<PathBuf> {
 #[cfg(windows)]
 use windows::home_dir_inner;
 
-#[cfg(unix)]
+#[cfg(any(unix, all(target_os = "wasi", target_vendor = "wasmer")))]
 fn home_dir_inner() -> Option<PathBuf> {
     #[allow(deprecated)]
     std::env::home_dir()
